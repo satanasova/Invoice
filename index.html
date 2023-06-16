@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 101 - Siyana Atanasova</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Alata&family=Amaranth&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/index.js"></script>
+</head>
+
+<body class="bg-light">
+    <header>
+        <div class="container-fluid p-0">
+            <div class="row top-bar fs-26 bg-white shadow-sm  align-items-center w-100 m-0">
+                <div class="col-12 col-lg-2 current-tab bg-purp ff-abel text-white py-4 px-3 d-flex justify-content-between align-items-center">
+                    <p class="d-inline text-nowrap m-0">Invoice Details</p>
+                    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.3567 9.76329C15.8426 9.70543 15.3185 9.83176 14.8732 10.1287L12.6983 7.98787C13.0068 7.53748 13.1381 7.0061 13.0787 6.48628L18.9311 0.633667L22.2076 3.91051L16.3567 9.76329ZM4.45439 17.0443L4.66611 17.257L8.38096 13.5398L9.30599 14.4525L5.58496 18.1744L5.79736 18.3898L4.90129 19.4959L1.95444 21.3647L1.47561 20.8865L3.34431 17.9416L4.45439 17.0443ZM9.75599 6.93664C10.1856 5.40074 9.79581 3.68414 8.59039 2.47581C7.38889 1.27924 5.69196 0.886123 4.16461 1.30063L6.75134 3.88658L6.07236 6.41899L3.53646 7.09752L0.951363 4.5137C0.537988 6.03981 0.930188 7.73678 2.12941 8.93687C3.38644 10.1945 5.19746 10.5632 6.78096 10.0481L6.79584 10.0625L17.435 20.7015C17.856 21.1209 18.4076 21.3343 18.9591 21.3343C19.5107 21.3343 20.0615 21.1209 20.4833 20.7015C21.3248 19.8625 21.3248 18.4983 20.4833 17.6522L9.75599 6.93664ZM19.1443 20.3398C18.692 20.3398 18.3247 19.971 18.3247 19.5163C18.3247 19.0608 18.692 18.6938 19.1443 18.6938C19.6005 18.6938 19.9693 19.0608 19.9693 19.5163C19.9701 19.971 19.6013 20.3398 19.1443 20.3398Z" fill="white"/>
+                    </svg>
+                </div>
+
+                <div class="col-12 col-lg-9 details text-shadow ff-amaranth d-flex flex-wrap justify-content-center">
+                    <p class="m-0 pe-3 px-md-5 text-nowrap">Client Name</p>
+                    <p class="m-0 ps-3 px-md-5 text-nowrap">Siyana Atanasova</p>
+                    <p class="date m-0 ms-md-auto px-3 px-md-0 text-nowrap "></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-lg overflow-hidden bg-white ff-alata shadow mh-90 my-5 p-2 d-flex flex-column">
+            <div class="row btn-row justify-content-end mb-4">
+                <div class="col-6 col-md-3 col-lg-2">
+                    <button id="add-product" class="fs-14 bg-mint border-0 w-100  py-2">Add New Product</button>
+                </div>
+            </div>
+
+            <div class="row product-row">
+                <div class="col-12 product-container">
+                    <div data-template="product" class="d-none row product d-flex justify-content-between mb-4 position-relative">
+                            <div class="col col-sm-4">
+                                <label for="name" class="text-nowrap">Product Name</label>
+                                <input id="name" class="form-control " type="text">
+                                <div class="invalid-feedback">
+                                    Please provide a product name.
+                                </div>
+                            </div>
+                            <div class="col col-sm-2">
+                                <label for="qty">Qty</label>
+                                <input id="qty" class="form-control text-center" type="number" min="0">
+                            </div>
+                            <div class="col col-sm-2">
+                                <label for="price">Price</label>
+                                <input id="price" class="form-control text-center" type="number" min="0" step=".1">
+                            </div>
+                            <div class="col col-sm-3">
+                                <label for="total">Total</label>
+                                <input id="total" class="product-total form-control text-center" type="text" value="0.00"  disabled >
+                            </div>
+                            <div class="col-1 w-maxcontent text-end pe-1 position-absolute end-0">
+                                <button class="btn btn-danger remove-product rounded-circle fs-14">&#10006;</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row discount-row justify-content-center justify-content-lg-end  mt-auto">
+                <div class="col-10 col-lg-3 p-0 pe-lg-3 d-flex flex-wrap align-items-center">
+                    <label for="discount" class="w-100">Discount %</label>
+                    <input id="discount-range" class="form-range w-50 pe-2" type="range" value="0" min="0" max="100">
+                    <div class="input-group w-50">
+                        <input id="discount-text" class="form-control  text-center" type="number" value="0" min="0" max="100">
+                        <div class="input-group-text">%</div>
+                        <div class="invalid-feedback">
+                            Please provide a valid discount. (0-100)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row total-row fs-18 ff-abel justify-content-between justify-content-lg-end">
+                <div class="col-2 w-maxcontent d-flex flex-column justify-content-around ">
+                    <p>Sub Total</p>
+                    <p>Total Discount</p>
+                    <p>Total</p>
+                </div>
+
+                <div class="col col-lg-3 totals text-center ps-0">
+                    <p class="sub-total p-4 bg-gray">0.00</p>
+                    <p class="total-disc p-4 bg-gray">0.00</p>
+                    <p class="grand-total p-4 bg-gray">0.00</p>
+                </div>
+
+
+            </div>
+        </div>  
+    </main>
+
+    <footer>
+        <div class="container-fluid ff-abel color-gray p-0">
+            <div class="row bg-white shadow-sm text-center w-100 my-5 mx-0 py-3">
+                <p class="m-0">Code with love &lt;3 </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
